@@ -1,0 +1,17 @@
+appdirs
+attrs
+cached-property
+certifi
+chardet
+defusedxml
+idna
+isodate
+lxml
+PySocks
+pyTelegramBotAPI
+pytz
+requests
+requests-toolbelt
+six
+suds-py3
+urllib3
