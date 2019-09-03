@@ -1,12 +1,16 @@
 
 def parse(history):
-    data = {"sender": history[0].UserParameters.Sndr, "recipient": history[0].UserParameters.Rcpn,
-            "from": history[0].AddressParameters.CountryFrom.NameRU,
+    data = {"sender": history[0].UserParameters.Sndr,
+            "recipient": history[0].UserParameters.Rcpn,
             "to": history[0].AddressParameters.MailDirect.NameRU}
     try:
         data["item"] = history[0].ItemParameters.ComplexItemName
     except AttributeError:
         data["item"] = "No information"
+    try:
+        data["from"] = history[0].AddressParameters.CountryFrom.NameRU
+    except AttributeError:
+        data["from"] = "No information"
 
     res = []
     for i in range(len(history)):
