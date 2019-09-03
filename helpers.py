@@ -1,8 +1,18 @@
 
 def parse(history):
-    data = {"sender": history[0].UserParameters.Sndr,
-            "recipient": history[0].UserParameters.Rcpn,
-            "to": history[0].AddressParameters.MailDirect.NameRU}
+    data = {}
+    try:
+        data["sender"] = history[0].UserParameters.Sndr
+    except AttributeError:
+        data["sender"] = "No information"
+    try:
+        data["recipient"] = history[0].UserParameters.Rcpn
+    except AttributeError:
+        data["recipient"] = "No information"
+    try:
+        data["to"] = history[0].AddressParameters.MailDirect.NameRU
+    except AttributeError:
+        data["to"] = "No information"
     try:
         data["item"] = history[0].ItemParameters.ComplexItemName
     except AttributeError:
@@ -15,10 +25,12 @@ def parse(history):
     res = []
     for i in range(len(history)):
         try:
-            res.append(f'{history[i].AddressParameters.OperationAddress.Description} '
+            res.append(f'{history[i].OperationParameters.OperDate}'
+                       f'{history[i].AddressParameters.OperationAddress.Description} '
                        f'{history[i].OperationParameters.OperAttr.Name}')
         except AttributeError:
-            res.append(f'{history[i].AddressParameters.OperationAddress.Description} '
+            res.append(f'{history[i].OperationParameters.OperDate}'
+                       f'{history[i].AddressParameters.OperationAddress.Description} '
                        f'{history[i].OperationParameters.OperType.Name}')
 
     data["points"] = '\n'.join(res)
