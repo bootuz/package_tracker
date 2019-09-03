@@ -25,11 +25,11 @@ def parse(history):
     res = []
     for i in range(len(history)):
         try:
-            res.append(f'{history[i].OperationParameters.OperDate}'
+            res.append(f'{history[i].OperationParameters.OperDate.date().isoformat()} '
                        f'{history[i].AddressParameters.OperationAddress.Description} '
                        f'{history[i].OperationParameters.OperAttr.Name}')
         except AttributeError:
-            res.append(f'{history[i].OperationParameters.OperDate}'
+            res.append(f'{history[i].OperationParameters.OperDate.date().isoformat()} '
                        f'{history[i].AddressParameters.OperationAddress.Description} '
                        f'{history[i].OperationParameters.OperType.Name}')
 
